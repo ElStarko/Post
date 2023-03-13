@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   const comment = new Comment({
     content: req.body.content,
     author: req.body.author,
-    postId: req.params.postId,
+    post: req.body.post,
   });
   try {
     const newComment = await comment.save();
@@ -41,10 +41,13 @@ router.put('/comments/:id', getComment, async (req, res) => {
 });
 
 // DELETE a comment
-router.delete('/comments/:id', getComment, async (req, res) => {
+router.delete('/:id', getComment, async (req, res) => {
+  console.log("got here", req.params)
+
+  res.comment.deleted = true;
   try {
-    await res.comment.remove();
-    res.json({ message: 'Comment deleted' });
+    const updatedComment = await res.comment.save();
+    res.json(updatedComment);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
