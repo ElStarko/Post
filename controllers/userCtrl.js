@@ -36,7 +36,7 @@ class UserCtrl {
       };
       jwt.sign(payload, jwtConfig, { expiresIn: 360000 }, (err, token) => {
         if (err) throw err;
-        
+        delete user._doc.password
         const altText = `Avatar for user ${userData.firstName}`;
         res.json({
           msg: "User Successfully created!",
