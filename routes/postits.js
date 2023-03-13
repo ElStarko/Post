@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     });
     try {
         const newPost = await post.save();
-        res.status(201).json(newPost);
+        res.status(201).json({...newPost._doc, msg: "post sucessfully sent"});
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -47,6 +47,8 @@ router.put('/:id', getPost, async (req, res) => {
 
 // SOFT DELETE a post
 router.delete('/:id', getPost, async (req, res) => {
+    console.log("got here", req.params)
+
     res.post.deleted = true;
     try {
         const updatedPost = await res.post.save();

@@ -12,4 +12,4 @@ var UserSchema = new Schema({
     createdDate : { type: Date, default: new Date()}
 })
 
-module.exports = mongoose.model('user', UserSchema)
+module.exports = mongoose.model('User', UserSchema)
