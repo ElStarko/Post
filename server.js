@@ -9,7 +9,7 @@ initDb();
 app.use(express.json({ extended: false}))
 app.get('/',(req,res) => res.json({msg: `welcome to this api`}))
 
-// app.use('/api/postits', require('./routes/postit'))
+app.use('/api/postits', require('./routes/postit'))
 // app.use('/api/comments', require('./routes/postit'))
 
 app.use('/api/users',require('./routes/users'))
