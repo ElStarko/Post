@@ -3,7 +3,7 @@ const router = express.Router();
 const Comment = require('../models/comment');
 
 // GET all comments for a post
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const comments = await Comment.find({ postId: req.params.postId }).populate('author');
     res.status(200).json(comments);
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 });
 
 // UPDATE a comment
-router.put('/', getComment, async (req, res) => {
+router.put('/comments/:id', getComment, async (req, res) => {
   if (req.body.content != null) {
     res.comment.content = req.body.content;
   }
@@ -41,7 +41,7 @@ router.put('/', getComment, async (req, res) => {
 });
 
 // DELETE a comment
-router.delete('/', getComment, async (req, res) => {
+router.delete('/comments/:id', getComment, async (req, res) => {
   try {
     await res.comment.remove();
     res.json({ message: 'Comment deleted' });
