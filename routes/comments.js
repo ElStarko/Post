@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 });
 
 // UPDATE a comment
-router.put('/comments/:id', getComment, async (req, res) => {
+router.put('/:id', getComment, async (req, res) => {
   if (req.body.content != null) {
     res.comment.content = req.body.content;
   }
